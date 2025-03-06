@@ -10,3 +10,10 @@ the alternative steps below;
 - Edit the inbound rules for the security groupmy instance is running on 
 - run the connection command from my aws console to connect to the instance
 
+
+Another way to retrieve your Public IP address, other than to check it in AWS Web console, is to use following command:
+- curl -s http://169.254.169.254/latest/meta-data/public-ipv4
+If this doesnt work read on metadata and IMDV2
+TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` 
+curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/public-ipv4
+
