@@ -1,0 +1,12 @@
+
+To connect to my EC2 instance, I was required to SSH into it. I had challenges doing this because I could not suucessfully convert my key pair from .pem to .ppk and use putty SSH server, so I followed 
+the alternative steps below;
+
+- Download git
+- Add it as a different profile on windows terminal
+- Add the exe file to the file path on windows terminal
+- cd to the actual location of the key pair file
+- chmod on the key pair file
+- Edit the inbound rules for the security groupmy instance is running on 
+- run the connection command from my aws console to connect to the instance
+
