@@ -3,7 +3,7 @@
 the alternative steps below;
 
 - Download git
-- Add it as a different profile on windows terminal
+- Add Gitbash as a different profile on windows terminal
 - Add the exe file to the file path on windows terminal
 - cd to the actual location of the key pair file
 - chmod on the key pair file
