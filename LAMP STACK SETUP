@@ -1,0 +1,25 @@
+#DEPLOY A LAMP STACK WEBSITE IN AWS CLOUD
+
+A "LAMP stack" refers to a popular open-source software combination used for building websites and web applications, 
+where "LAMP" stands for Linux (operating system), Apache (web server), MySQL (database), and PHP (programming language); 
+essentially, it's a group of technologies that work together to host and deliver dynamic web content. 
+
+Components breakdown:
+Linux: The operating system that provides a stable foundation for the entire stack. 
+Apache: The web server responsible for handling HTTP requests and delivering web content. 
+MySQL: The relational database management system used to store and manage application data. 
+PHP: The scripting language used to generate dynamic content on the server-side. 
+
+Step 1 ++ SET UP YOUR EC2 INSTANCE IN AWS CLOUD
+
+- AWS can provide you with a free virtual server called an EC2 instance. Followt he instruction in the video below to achieve same; https://www.youtube.com/watch?v=xxKuB9kJoYM&list=PLtPuNR8I4TvkwU7Zu0l0G_uwtSUXLckvh&index=6
+
+- Connect to your EC2 instance with the video guide: https://www.youtube.com/watch?v=TxT6PNJts-s&list=PLtPuNR8I4TvkwU7Zu0l0G_uwtSUXLckvh&index=7
+You will be required to 
+
+
+
+
+
+
+
