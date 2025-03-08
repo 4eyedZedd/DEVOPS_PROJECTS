@@ -10,14 +10,38 @@ Apache: The web server responsible for handling HTTP requests and delivering web
 MySQL: The relational database management system used to store and manage application data. 
 PHP: The scripting language used to generate dynamic content on the server-side. 
 
-Step 1 ++ SET UP YOUR EC2 INSTANCE IN AWS CLOUD
+STEP 1 ++ SET UP YOUR EC2 INSTANCE IN AWS CLOUD
 
-- AWS can provide you with a free virtual server called an EC2 instance. Followt he instruction in the video below to achieve same; https://www.youtube.com/watch?v=xxKuB9kJoYM&list=PLtPuNR8I4TvkwU7Zu0l0G_uwtSUXLckvh&index=6
+>> AWS can provide you with a free virtual server called an EC2 instance. Follow  the instruction in the video below to achieve same; https://www.youtube.com/watch?v=xxKuB9kJoYM&list=PLtPuNR8I4TvkwU7Zu0l0G_uwtSUXLckvh&index=6
+Be sure to use a linux based AMI for your EC2 instance
 
-- Connect to your EC2 instance with the video guide: https://www.youtube.com/watch?v=TxT6PNJts-s&list=PLtPuNR8I4TvkwU7Zu0l0G_uwtSUXLckvh&index=7
-You will be required to 
+>> Connect to your EC2 instance with the video guide: https://www.youtube.com/watch?v=TxT6PNJts-s&list=PLtPuNR8I4TvkwU7Zu0l0G_uwtSUXLckvh&index=7
+You will be required to SSH into your virtual server as such you will require a tool called PUTTY that utilizes the SSH protocol to establish connectivity into the server. I used a different approach to
+achieve this, this is contained in https://github.com/4eyedZedd/devops_task_1/blob/934bb3c66efc3466e851b072ea0138173b52025f/TROUBLESHOOTING 
 
 
+STEP 2 ++ INSTALL APACHE AND UPDATE THE INSTANCE FIRE WALL
+
+Apache HTTP Server is the most widely used web server software. Developed and maintained by Apache Software Foundation, Apache is an open source software available for free. 
+It runs on 67% of all webservers in the world. It is fast, reliable, and secure. It can be highly customized to meet the needs of many different environments by using extensions and modules. 
+Most WordPress hosting providers use Apache as their web server software. However, websites and other applications can run on other web server software as well. Such as Nginx, Microsoft’s IIS, etc.
+Download it from https://httpd.apache.org/
+
+>> Update your Linux lib and install Apache2 with the command -  sudo apt update && sudo apt install apache2
+>> Verify that it's running on the OS with the command - sudo systemctl status apache2
+>> Enable inbound traffic to the web server by editing the inbound rules under the security groups on your instance. add a new rule for HTTP traffic from anywhere (0.0.0.0) on TCP port 80.
+>> Run curl http://127.0.0.1:80 to access the server on ubuntu shell. This will produce some strangely formatted text, this just means that Apache web service responds to ‘curl’ command with some payloa
+>> To see if our web server is responding, run http://<Public-IP-Address>:80. Pass your public IPV4 address of your instance to the bracket. if you can see apache on your page, then its working well.
+
+
+STEP 2 ++ INSTALL MYSQL 
+
+ MySQL is a popular relational database management system used within PHP environments.
+>> Update your Linux lib and install Mysql server with the command -  sudo apt update && sudo apt install mysql-server
+>> Run a security script that comes pre-installed with MySQL, to remove some insecure default settings and lock down access to the database system - sudo mysql_secure_installation.
+   This will ask if you want to configure the VALIDATE PASSWORD COMPONENT. Enabling this feature is something of a judgment call. If enabled, passwords which don’t match the specified criteria will be rejected by MySQL with an error. 
+   It is safe to leave validation disabled, but you should always use strong, unique passwords for database credentials.
+>> Test if youcan login to Mysql console by running - sudo mysql
 
 
 
