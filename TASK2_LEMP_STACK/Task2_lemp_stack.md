@@ -50,7 +50,7 @@ On Ubuntu,  Nginx has one server block enabled by default and is configured to s
 * Create a web directory for your domain with `sudo mkdir /var/www/projectLEMP`
 * Assign ownership of the directory with the $USER environment variable, which will reference your current system user: `sudo chown -R $USER:$USER /var/www/projectLEMP`. You can confirm the change by running `ll /var/www/projectLEMP` and your feedback should be something like this ![alt text](<Images/chnge owndership for prjctlemp dir .png>)
 * Open a new configuration file in Nginx’s sites-available directory using nano (or your preferred command line editor). `sudo nano /etc/nginx/sites-available/projectLEMP`
-* This will create a new blank file, you can then paste the babre-bones configuration inside it:
+* This will create a new blank file, you can then paste the bare-bones configuration inside it:
 
         #/etc/nginx/sites-available/projectLEMP`
  
@@ -104,11 +104,90 @@ Note: Leave this file in place as the landing page for your application until yo
 
 After confirming that your LEMP STACK is set up, you have to test that Nginx is correctly handing out php files off to the PHP processor. 
 
-* To do this, create a test php file called *info.php* within the document root with your text editor i.e nano
-`sudo nano /var/www/projectLEMP/info.php`. Then past the lines below into the new file . This is valid PHP code that will reveal information about your server 
+* To do this, create a test php file called *index.php* within the document root with your text editor i.e nano
+`sudo nano /var/www/projectLEMP/index.php`. Then paste the lines below into the new file . This is valid PHP code that will reveal information about your server.
 
         <?php
 
         phpinfo();
-* Visit the domain name or public IP address set up in the nginx config file followed by '/info.php'
+* Visit the domain name or public IP address set up in the nginx config file followed by '/info.php' i.e *http://ec2-13-60-15-18.eu-north-1.compute.amazonaws.com/index.php or http://13.60.15.18/index.php* and you should get a result similar to the image below.
+![alt text](<Images/php config working .png>)
+
+* Finally, it’s best to remove the file you created as it contains sensitive information about your PHP environment and your Ubuntu server. Run the command to remove that file:`sudo rm /var/www/your_domain/info.php`
+You can always regenerate this file if you need it later.
+
+## STEP 6 – RETRIEVING DATA FROM MYSQL DATABASE WITH PHP (CONTINUED)
+
+In this step you will create a test database (DB) with simple "To do list" and configure access to it, so the Nginx website would be able to query data from the DB and display it.
+
+At the time of this writing, the native MySQL PHP library mysqlnd doesn’t support caching_sha2_authentication, the default authentication method for MySQL 8. We’ll need to create a new user with the mysql_native_password authentication method in order to be able to connect to the MySQL database from PHP.
+
+* Login to your mysql console using the root account: `sudo mysql` or `sudo mysql -p` if you set up a password when you configured mysql. You should see a prompt like this: **mysql>** if you are correctly logged in.
+
+* Create a database called **example_db** with the command:
+
+            CREATE DATABASE `example_db`;
+
+* Create a new user and grant full privileges on the database you have just created. The following command creates a new user named 'sample_user', using mysql_native_password as default authentication method. We’re defining this user’s password as 'sample_user':
+
+        CREATE USER 'sample_user'@'%' IDENTIFIED WITH mysql_native_password BY 'Password_1';
+
+* Give this user permission over the 'example_db' database: `GRANT ALL ON example_db.* TO 'sample_user'@'%';` This gives **sample_user** full privileges over **example_db** but restricts him from creating or modifying other databases on the server.
+* Exit mysql shell with  the `exit` command then try login for the new user with `mysql -u sample_user -p`
+* You should see a **mysql>** prompt if you are successfully logged in. You can then run a query like `SHOW DATABASES;` to see datases on server. You should see an image like this;![alt text](<Images/sample_user login.png>)
+* Next, create table named *todo_list* with the commands below:
+
+        i. USE example_db;
+        ii. CREATE TABLE example_database.todo_list (
+ 	        item_id INT AUTO_INCREMENT,
+ 	        content VARCHAR(255),
+ 	        PRIMARY KEY(item_id)
+            );
+        iii. INSERT INTO todo_list (content)VALUES        ("Wake up"); 
+        INSERT INTO todo_list (content) VALUES ("Pray to God");
+        INSERT INTO todo_list (content) VALUES ("Take what's mine");
+        INSERT INTO todo_list (content) VALUES ("Take some more");
+        INSERT INTO todo_list (content) VALUES ("Give God his share"); 
+        INSERT INTO todo_list (content) VALUES ("Take Caesar's own");
+
+* Run the query `select * from todo_list` and your output should looks something like the image below: ![alt text](<Images/mysql create db + table.png>)
+* Exit the mysql shell.
+
+Now you can create a PHP script that will connect to MySQL and query for your content. 
+
+* Create a new PHP file in your custom web root directory using your preferred editor. We’ll use vi for that: 
+`nano /var/www/projectLEMP/todo_list.php`
+* Paste the config below inside of the todo_list.php file:
+
+        <?php
+        $user = "sample_user";
+        $password = "Password_1";
+        $database = "example_db";
+        $table = "todo_list";
+ 
+        try {
+         $db = new PDO("mysql:host=localhost;dbname=$database", $user, $password);
+         echo "<h2>TODO</h2><ol>";
+         foreach($db->query("SELECT content FROM $table") as $row) {
+	        echo "<li>" . $row['content'] . "</li>";
+          }
+          echo "</ol>";
+         
+        } catch (PDOException $e) {
+	            print "Error!: " . $e->getMessage() . "<br/>";
+	            die();
+        }
+
+* Save and exit the file with `ZZ` command.
+* You can now access the page in your web browser by visiting the domain name or public IP address configured for your website, followed by /todo_list.php:
+http://<Public_domain_or_IP>/todo_list.php and you should have a result similar to the image below;
+![alt text](<Images/php calling mysql.png>). If you have the same result, your setup is working correctly.
+
+
+
+
+
+
+
+
 
