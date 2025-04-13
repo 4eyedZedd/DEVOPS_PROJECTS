@@ -3,8 +3,8 @@
 
 * To connect to my EC2 instance, I was required to SSH into it. I had challenges doing this because I could not suucessfully convert my key pair from .pem to .ppk and use putty SSH server, so I followed 
 the alternative steps below;
-
-    - Download git and install the package
+    -  Create a Workspace folder in a comfortable location in your system file directory and open that folder using the explorer feature of Vscode. This folder houses the devops tasks that can be worked on with VScode and pushed to git.
+    - Download git from the web using this [URL](https://git-scm.com/downloads/win) and follow the prompts to complete installation.
     - Add Gitbash as a different profile on windows terminal
     - Add the exe file to the file path on windows terminal
     - cd to the actual location of the key pair file. `cd /c/users/DELL/downloads`
