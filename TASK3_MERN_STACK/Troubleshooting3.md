@@ -45,3 +45,14 @@ In trying to install [axios](https://github.com/axios/axios) `npm install axios`
 ![alt text](<Images/npm install axios node version issue.png>) This relates to the node version and to fix this, I installed the newer version of nvm with `nvm install 18` then `nvm use 18`.
 
 Then I ran the npm install axios again and it installed axios.
+
+
+## Issues with displaying the fianl result of the reach app.
+
+At the end of running through all the tasks my result was not consistent with the expected final result of the task in the sense that it was not rendering the correct information to the front end app.![alt text](<Images/final server output for Mern stack.png>)
+
+I troubleshot with my tutor and we discovered the following issues;
+
+- Bad copying of configuration files - I did not copy the configuration files correctly, I missed out the ending semi-colons on the configuration scripts. This happened on my `input.js` file as well as `ListTodo.js` files. Also on my `App.css' file, I pasted the configuration script multiple times. I had multiple occurences of App, input and button scripts
+
+- Multiple `Input.js` files - I wrongly created an extra empty input.js file. 

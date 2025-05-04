@@ -570,9 +570,9 @@ We now need to make little adjustment to our react code. Delete the logo and adj
         }
 
 
-11. Go to the Todo directory with `cd ../..` and when you are in the Todo directory, run `npm run dev` and makesure that the package compiles succesfully, then try access the URL 'http://13.53.39.222/:3000/' from your browser and you should get a response similar to the one below; ![alt text](<Images/final server output for Mern stack.png>).
+11. Go to the Todo directory with `cd ../..` and when you are in the Todo directory, run `npm run dev` and makesure that the package compiles succesfully, then try access the URL 'http://13.53.39.222/:3000/' from your browser and you should get a response similar to the one below; ![alt text](<Images/correct final output on mern stack setup.png>)
 
-If you got to this stage, then you have completed this task by making a simple To-Do and deployed it to MERN stack. You wrote a frontend application using React.js that communicates with a backend application written using Expressjs. You also created a MongoDB backend for storing tasks in a database.
+I experienced issues getting this final result which is documented in my troublehssoting.md file. However, if you got to this stage, then you have completed this task by making a simple To-Do and deployed it to MERN stack. You wrote a frontend application using React.js that communicates with a backend application written using Expressjs. You also created a MongoDB backend for storing tasks in a database.
 
 
 
