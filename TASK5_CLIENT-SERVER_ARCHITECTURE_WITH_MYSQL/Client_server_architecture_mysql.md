@@ -33,7 +33,7 @@ In this task, we will be implementing a client server architecture using mysql d
     - Install mysql client: `sudo apt install mysql-client`.
     - Confirm that you have installed the client successfully with the command: `mysql --version`. I had delays moving forward because I kept running the command: `sudo systemctl status mysql-client` and getting the error *Unit mysql-client.service could not be found.*
 
-### Step 4 - Allow the two servers communicate with themselves. Do this with the following steps.
+-  Step 4 - Allow the two servers communicate with themselves. Do this with the following steps.
 
     - By default, both EC2 virtual servers are located in the same local virtual network, so they can communicate to each other using local IP addresses. Use *"mysql server's"* local IP address to connect from mysql client. MySQL server uses TCP port 3306 by default, so we will have to open it by creating a new entry in ‘Inbound rules’ in ‘mysql server’ Security Groups. For extra security, do not allow all IP addresses to reach your ‘mysql server’ – allow access only to the specific local IP address of  ‘mysql client’. ![alt text](<Project5_Images/add mysql tcp port on mysql server.png>). 
     Confirm your hostname with: `hostname -i`
